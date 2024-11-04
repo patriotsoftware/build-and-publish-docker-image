@@ -52,4 +52,4 @@ runs:
         DOCKER_IMAGE_NAME: ${{ inputs.docker-image-name }}
         DOCKER_TAG: ${{ inputs.docker-tag }}
         DOCKER_EXTRA_ARGS: ${{ inputs.docker-extra-args }}
-      run: scripts/action.sh
+      run: ${{ github.action_path }}/scripts/action.sh
