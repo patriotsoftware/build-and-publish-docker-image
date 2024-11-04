@@ -17,6 +17,7 @@ fi
 
 # Build the Docker image
 echo "*** Building Dockerfile ***"
+echo "Command: build -t "$DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG" -f $DOCKERFILE_PATH $DOCKER_CONTEXT --no-cache $DOCKER_ARGS_LIST"
 docker build -t "$DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG" -f $DOCKERFILE_PATH $DOCKER_CONTEXT --no-cache $DOCKER_ARGS_LIST
 docker tag "$DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG" "$DOCKER_FULL_IMAGE_NAME:latest"
 
