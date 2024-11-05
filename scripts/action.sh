@@ -6,6 +6,7 @@ DOCKER_FULL_IMAGE_NAME="$ECR_REGISTRY/$ECR_REPO_NAME"
 
 # Determine Build Args
 if [[ "$DOCKER_EXTRA_ARGS" != "" ]]; then
+    echo "ARGS LIST"
     export IFS=","
     DOCKER_ARGS_LIST=""
     for arg in $DOCKER_EXTRA_ARGS; do
@@ -17,11 +18,11 @@ fi
 
 # Build the Docker image
 echo "*** Building Dockerfile ***"
-echo "Command: build -t "$DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG" -f $DOCKERFILE_PATH --no-cache $DOCKER_ARGS_LIST $DOCKER_CONTEXT"
-docker context ls
+echo Command: build -t $DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG -f $DOCKERFILE_PATH --no-cache $DOCKER_ARGS_LIST $DOCKER_CONTEXT
+docker context inspect
 docker context use default
-docker build -t "$DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG" -f $DOCKERFILE_PATH --no-cache $DOCKER_ARGS_LIST $DOCKER_CONTEXT
-docker tag "$DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG" "$DOCKER_FULL_IMAGE_NAME:latest"
+docker build -t $DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG -f $DOCKERFILE_PATH --no-cache $DOCKER_ARGS_LIST $DOCKER_CONTEXT
+docker tag $DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG $DOCKER_FULL_IMAGE_NAME:latest
 
 # Create the ECR Repository
 echo "*** Creating ECR Repository ***"
