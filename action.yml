@@ -1,6 +1,6 @@
 name: 'Build and Publish Docker Image'
 author: DevOps
-description: Build and publish Docker image to ECR
+description: 'Build and publish Docker image to ECR.'
 
 inputs:
   aws-access-key-id:
