@@ -16,11 +16,15 @@ else
     DOCKER_ARGS_LIST=""
 fi
 
+# Configure Docker Builder if necessary
+DOCKER_CURRENT_CONTEXT=$(docker context use default)
+if [[ "$DOCKER_CURRENT_CONTEXT" == "[]" ]]; then
+    docker context use default
+fi
+
 # Build the Docker image
 echo "*** Building Dockerfile ***"
 echo Command: build -t $DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG -f $DOCKERFILE_PATH --no-cache $DOCKER_ARGS_LIST $DOCKER_CONTEXT
-docker context inspect
-docker context use default
 docker build -t $DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG -f $DOCKERFILE_PATH --no-cache $DOCKER_ARGS_LIST $DOCKER_CONTEXT
 docker tag $DOCKER_FULL_IMAGE_NAME:$DOCKER_TAG $DOCKER_FULL_IMAGE_NAME:latest
 
