@@ -9,6 +9,10 @@ inputs:
   aws-secret-access-key:
     description: 'The AWS Secret key for authentication.'
     required: true
+  aws-region:
+    description: 'The AWS region used for ECR login.'
+    required: false
+    default: 'us-east-1'
   ecr-repo-name:
     description: 'The name of the ECR repository to create. This is also used to tag the image.'
     required: true
@@ -28,7 +32,7 @@ runs:
       with:
         aws-access-key-id: ${{ inputs.aws-access-key-id }}
         aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
-        aws-region: us-east-1
+        aws-region: ${{ inputs.aws-region }}
 
     - name: Login to Amazon ECR
       id: login-ecr
