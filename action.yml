@@ -3,16 +3,6 @@ author: DevOps
 description: 'Build and publish Docker image to ECR.'
 
 inputs:
-  aws-access-key-id:
-    description: 'The AWS Access key for authentication.'
-    required: true
-  aws-secret-access-key:
-    description: 'The AWS Secret key for authentication.'
-    required: true
-  aws-region:
-    description: 'The AWS region used for ECR login.'
-    required: false
-    default: 'us-east-1'
   ecr-repo-name:
     description: 'The name of the ECR repository to create. This is also used to tag the image.'
     required: true
@@ -27,13 +17,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Authenticate with AWS
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ inputs.aws-access-key-id }}
-        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
-        aws-region: ${{ inputs.aws-region }}
-
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
