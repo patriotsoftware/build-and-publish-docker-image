@@ -23,7 +23,7 @@ runs:
     
     - name: Create ECR Repository
       shell: bash
-      run: aws ecr create-repository --repository-name ${{ inputs.ecr-repo-name }} || echo "Repository exists already. Skipping creation."
+      run: aws ecr create-repository --repository-name ${{ inputs.ecr-repo-name }} --tags Key=repository,Value=SynergyDataSystems/${{ github.event.repository.name }} || echo "Repository exists already. Skipping creation."
 
     - name: Set up Docker Buildx
       id: buildx
